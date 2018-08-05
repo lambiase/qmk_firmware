@@ -74,8 +74,8 @@
 #define CH_UE KC_LBRC
 #define CH_OE KC_SCLN
 
-#define CH_PARA KC_GRAVE // secction sign § and °
-#define CH_CARR KC_EQL // carret ^ ` ~
+#define CH_PARA KC_GRAVE // section sign § and °
+#define CH_CARR KC_EQL // caret ^ ` ~
 #define CH_DIER KC_RBRC // dieresis ¨ ! ]
 #define CH_DLR KC_BSLS // $ £ }
 #define CH_LESS KC_NUBS // < and > and backslash
