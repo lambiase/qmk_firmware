@@ -1,4 +1,3 @@
-//make ergodox_ez:stenoswiss
 #include QMK_KEYBOARD_H
 #include "debug.h"
 #include "action_layer.h"
@@ -6,13 +5,12 @@
 #include "keymap_german_ch.h"
 #include "keymap_plover.h"
 
-#define _______ KC_TRNS
-
 #define BASE 0 // default layer
 #define SYMB 1 // symbols
-#define MDIA 2 // media keys
-#define STEN 3 // Steno Qwerty
-#define NAVI 4 // navigation layer
+#define NAVI 2 // media/navigation keys
+#define MOUS 3 // mouse keys
+#define STEN 4 // Steno Qwerty
+
 
 enum custom_keycodes {
   PLACEHOLDER = SAFE_RANGE, // can always be here
@@ -47,20 +45,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Otherwise, it needs KC_*
 [BASE] = KEYMAP(  // layer 0 : default
         // left hand
-        KC_ESC,               KC_1,    KC_2,            KC_3,         KC_4,         KC_5, TG(2),
-        KC_TAB,                KC_Q,    KC_W,            KC_E,         KC_R,         KC_T, TG(1),
-        CTL_T(KC_NO),          KC_A,    KC_S,            KC_D,         KC_F,         KC_G,
-        KC_LSHIFT,             CH_Y,    KC_X,            KC_C,         KC_V,         KC_B, TG(2),
-        _______,       _______, _______, KC_LGUI, KC_LALT,
-        KC_APP, KC_INS,
+        KC_ESC,               CH_1,      CH_2,            CH_3,         CH_4,           CH_5, TG(NAVI),
+        KC_TAB,               CH_Q,      CH_W,            CH_E,         CH_R,           CH_T, TG(MOUS),
+        CTL_T(KC_NO),         CH_A,      CH_S,            CH_D,         LT(NAVI, CH_F), CH_G,
+        KC_LSHIFT,            CH_Y,      CH_X,            CH_C,         CH_V,           CH_B, TG(SYMB),
+        _______,              _______,   _______,         KC_LGUI,      KC_LALT,
+        KC_APP,               KC_INS,
         KC_HOME,
-        KC_BSPACE,             KC_DELETE,KC_END,
+        KC_BSPACE,            KC_DELETE, KC_END,
         // right hand
-        _______,       KC_6,             KC_7,  KC_8,     KC_9,        KC_0,            CH_QUOT,
-        TG(3),         CH_Z,             KC_U,  KC_I,     KC_O,        KC_P,            CH_DIER,
-        KC_H,          KC_J,             KC_K,  KC_L,     CH_LESS, CH_CARR,
-        ALGR_T(KC_NO), KC_N,             KC_M,  KC_COMMA, KC_DOT,      RCTL_T(CH_MINS), KC_RSHIFT,
-        KC_LEFT,       KC_DOWN,          KC_UP, KC_RIGHT, _______,
+        _______,       CH_6,             CH_7,    CH_8,     CH_9,        CH_0,            CH_QUOT,
+        TG(MOUS),      CH_Z,             CH_U,    CH_I,     CH_O,        CH_P,            CH_DIER,
+                       CH_H,             CH_J,    CH_K,     CH_L,        CH_LESS,         CH_CARR,
+        ALGR_T(KC_NO), CH_N,             CH_M,    KC_COMMA, KC_DOT,      RCTL_T(CH_MINS), KC_RSHIFT,
+        KC_LEFT,       KC_DOWN,          KC_UP,   KC_RIGHT, TG(4),
         KC_PSCR,       LALT(KC_LSFT),
         KC_PGUP,
         KC_PGDOWN,     KC_ENTER,KC_SPACE
@@ -89,25 +87,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // SYMBOLS
 [SYMB] = LAYOUT_ergodox(
        // left hand
-       CH_PARA ,KC_F1 ,  KC_F2 ,  KC_F3  ,  KC_F4 ,  KC_F5 ,  _______ ,
-       _______ ,CH_HASH  ,CH_EQL  ,CH_AMPR  ,CH_LBRC ,CH_QUOT ,_______   ,
-       _______ ,CH_AT    ,CH_DLR  , CH_MINS ,CH_LPRN ,CH_BSLS ,
-       _______ ,CH_PLUS  ,CH_PAST ,CH_LESS  ,CH_LCBR ,CH_QST ,_______   ,
-          EPRM ,CH_DIER  ,_______ ,_______  ,_______ ,
-                                       _______,_______,
-                                               _______,
-                               _______,_______,_______,
+       CH_PARA , KC_F1   , KC_F2   , KC_F3   , KC_F4   , KC_F5   , _______ ,
+       _______ , CH_HASH , CH_EQL  , CH_AMPR , CH_LBRC , CH_QUOT , _______ ,
+       _______ , CH_AT   , CH_DLR  , CH_MINS , CH_LPRN , CH_BSLS ,
+       _______ , CH_PLUS , CH_PAST , CH_LESS , CH_LCBR , CH_QST  , _______ ,
+       EPRM    , CH_DIER , _______ , _______ , _______ ,
+                                                         _______ , _______ ,
+                                                                   _______ ,
+                                               _______ , _______ , _______ ,
        // right hand
-       _______ , KC_F6   ,   KC_F7 ,  KC_F8   ,   KC_F9 ,   KC_F10 ,  KC_F11 ,
-       _______ , CH_DQOT , CH_RBRC   ,  CH_PIPE , CH_ACUT , CH_TILD  , KC_F12  ,
-                 CH_SLSH, CH_RPRN    ,CH_UNDS, CH_CARR, CH_DIER, KC_F13,
-       _______ , CH_EXLM , CH_RCBR ,CH_MORE ,  CH_GRV , CH_PERC , _______ ,
-                         _______,_______,  _______,    _______,  _______,
-       _______, _______,
-       _______,
-       _______, _______, _______
+       _______ , KC_F6   , KC_F7   , KC_F8   , KC_F9   , KC_F10  , KC_F11  ,
+       _______ , CH_DQOT , CH_RBRC , CH_PIPE , CH_ACUT , CH_TILD , KC_F12  ,
+                 CH_SLSH , CH_RPRN , CH_UNDS , CH_CARR , CH_DIER , KC_F13  ,
+       _______ , CH_EXLM , CH_RCBR , CH_MORE , CH_GRV  , CH_PERC , _______ ,
+                           _______ , _______ , _______ , _______ , _______ ,
+       _______ , _______ ,
+       _______ ,
+       _______ , _______ , _______
 ),
-/* Keymap 2: Media and mouse keys
+/* Keymap 2: Media and navigation keys
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
@@ -128,8 +126,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 |      |      |      |       |      |      |      |
  *                                 `--------------------'       `--------------------'
  */
-// MEDIA AND MOUSE
-[MDIA] = LAYOUT_ergodox(
+// MEDIA AND NAVIGATION
+[NAVI] = LAYOUT_ergodox(
        _______, _______, _______, _______, _______, _______, _______,
        _______, _______, _______, KC_MS_U, _______, _______, _______,
        _______, _______, KC_MS_L, KC_MS_D, KC_MS_R, _______,
@@ -140,16 +138,57 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                   _______, _______, _______,
     // right hand
        _______,  _______, _______, _______, _______, _______, _______,
+       _______,  _______, KC_PGUP, KC_UP  , KC_PGDN, _______, _______,
+                 KC_HOME, KC_LEFT, KC_DOWN, KC_RIGHT, KC_END, KC_MPLY,
        _______,  _______, _______, _______, _______, _______, _______,
-                 _______, _______, _______, _______, _______, KC_MPLY,
-       _______,  _______, _______, KC_MPRV, KC_MNXT, _______, _______,
-                          KC_VOLU, KC_VOLD, KC_MUTE, _______, _______,
+                          KC_VOLU, KC_VOLD, KC_MUTE,KC_MPRV, KC_MNXT,
        _______, _______,
        _______,
        _______, _______, KC_WBAK
 ),
 
-/* Keymap 6: Steno for Plover
+/* Keymap 3: Mouse layer
+ *
+ * ,--------------------------------------------------.           ,--------------------------------------------------.
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+ * |        |      |      | MsUp |      |      |      |           |      |      |      |      |      |      |        |
+ * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * |        |      |MsLeft|MsDown|MsRght|      |------|           |------|      |      |      |      |      |  Play  |
+ * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |      |           |      |      |      | Prev | Next |      |        |
+ * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
+ *   |      |      |      | Lclk | Rclk |                                       |VolUp |VolDn | Mute |      |      |
+ *   `----------------------------------'                                       `----------------------------------'
+ *                                        ,-------------.       ,-------------.
+ *                                        |      |      |       |      |      |
+ *                                 ,------|------|------|       |------+------+------.
+ *                                 |      |      |      |       |      |      |Brwser|
+ *                                 |      |      |------|       |------|      |Back  |
+ *                                 |      |      |      |       |      |      |      |
+ *                                 `--------------------'       `--------------------'
+ */
+// MOUSE
+[MOUS] = LAYOUT_ergodox(
+       _______, _______, _______, _______, _______, _______, _______,
+       _______, _______, _______, _______, _______, _______, _______,
+       _______, KC_BTN2, KC_BTN3, KC_BTN1, _______, _______,
+       _______, _______, _______, _______, _______, _______, _______,
+       _______, _______, _______, _______, _______,
+                                           _______, _______,
+                                                    _______,
+                                  _______, _______, _______,
+    // right hand
+       _______,  _______, _______, _______, _______, _______, _______,
+       _______,  _______, KC_PGUP, KC_MS_U, KC_PGDN, _______, _______,
+                 _______, KC_MS_L, KC_MS_D, KC_MS_R, _______, _______,
+       _______,  _______, KC_ACL0, KC_ACL1, KC_ACL2, _______, _______,
+                          _______, _______, _______, _______, _______,
+       _______, _______,
+       _______,
+       _______, _______, _______
+),
+/* Keymap 4: Steno for Plover
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |  BASE  |
@@ -191,47 +230,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                           _______,      _______,
                                           _______,
                                           _______,PV_E, PV_U
-),
-/* Keymap 2: Navigation layer
- *
- * ,--------------------------------------------------.           ,--------------------------------------------------.
- * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
- * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * |        |      |      | MsUp |      |      |      |           |      |      |      |      |      |      |        |
- * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |      |MsLeft|MsDown|MsRght|      |------|           |------|      |      |      |      |      |  Play  |
- * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |      |      |      |      |      |      |           |      |      |      | Prev | Next |      |        |
- * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |      |      |      | Lclk | Rclk |                                       |VolUp |VolDn | Mute |      |      |
- *   `----------------------------------'                                       `----------------------------------'
- *                                        ,-------------.       ,-------------.
- *                                        |      |      |       |      |      |
- *                                 ,------|------|------|       |------+------+------.
- *                                 |      |      |      |       |      |      |Brwser|
- *                                 |      |      |------|       |------|      |Back  |
- *                                 |      |      |      |       |      |      |      |
- *                                 `--------------------'       `--------------------'
- */
-// NAVIGATION
-[NAVI] = LAYOUT_ergodox(
-       _______, _______, _______, _______, _______, _______, _______,
-       _______, _______, _______, _______, _______, _______, _______,
-       _______, _______, _______, _______, _______, _______,
-       _______, _______, _______, _______, _______, _______, _______,
-       _______, _______, _______, _______, _______,
-                                           _______, _______,
-                                                    _______,
-                                  _______, _______, _______,
-    // right hand
-       _______,  _______, _______, _______, _______, _______, _______,
-       _______,  _______, KC_PGUP, KC_UP  , KC_PGDN, _______, _______,
-                 _______, KC_LEFT, KC_DOWN, KC_RIGHT, _______, _______,
-       _______,  _______, _______, _______, _______, _______, _______,
-                          _______, _______, _______, _______, _______,
-       _______, _______,
-       _______,
-       _______, _______, _______
 ),
 };
 
