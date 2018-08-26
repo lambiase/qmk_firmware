@@ -46,9 +46,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] = KEYMAP(  // layer 0 : default
         // left hand
         KC_ESC,               CH_1,      CH_2,            CH_3,         CH_4,           CH_5, TG(NAVI),
-        KC_TAB,               CH_Q,      CH_W,            CH_E,         CH_R,           CH_T, TG(MOUS),
+        KC_TAB,               CH_Q,      CH_W,            CH_E,         CH_R,           CH_T, TG(SYMB),
         CTL_T(KC_NO),         CH_A,      CH_S,            CH_D,         LT(NAVI, CH_F), CH_G,
-        KC_LSHIFT,            CH_Y,      CH_X,            CH_C,         CH_V,           CH_B, TG(SYMB),
+        KC_LSHIFT,            CH_Y,      CH_X,            CH_C,         CH_V,           CH_B, OSL(SYMB),
         _______,              _______,   _______,         KC_LGUI,      KC_LALT,
         KC_APP,               KC_INS,
         KC_HOME,
@@ -61,7 +61,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LEFT,       KC_DOWN,          KC_UP,   KC_RIGHT, TG(STEN),
         KC_PSCR,       LALT(KC_LSFT),
         KC_PGUP,
-        KC_PGDOWN,     KC_ENTER,KC_SPACE
+        KC_PGDOWN,     KC_ENTER,         CTL_T(KC_SPACE)
     ),
 /* Keymap 1: Symbol Layer
  *
@@ -144,7 +144,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                           KC_VOLU, KC_VOLD, KC_MUTE,KC_MPRV, KC_MNXT,
        _______, _______,
        _______,
-       _______, _______, KC_WBAK
+       _______, _______, _______
 ),
 
 /* Keymap 3: Mouse layer
